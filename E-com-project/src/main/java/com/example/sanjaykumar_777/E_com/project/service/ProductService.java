@@ -31,4 +31,15 @@ public class ProductService {
         Product product1 = productRepository.save(product);
         return new ResponseEntity<>(product1, HttpStatus.CREATED);
     }
+
+    public Product updateProduct(int prodId, Product product, MultipartFile imageFile) throws IOException {
+        product.setImageData(imageFile.getBytes());
+        product.setImageName(product.getImageName());
+        product.setImageType(product.getImageType());
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(int prodId) {
+        productRepository.deleteById(prodId);
+    }
 }
